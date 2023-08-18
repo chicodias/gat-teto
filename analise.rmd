@@ -1,0 +1,78 @@
+---
+title: "Ações Judiciais sobre a GAT no Tribunal de Justiça de São Paulo"
+output: html_document
+---
+
+## Introdução
+
+A Gratificação por Acúmulo de Trabalho (GAT) é um tema relevante e, por vezes, controverso na administração pública brasileira. Tal gratificação é concedida a funcionários que, em determinadas circunstâncias, assumem responsabilidades adicionais em seus cargos. Contudo, há casos em que essa gratificação pode exceder o teto constitucional, levando a disputas legais e ações judiciais.
+
+### Contexto
+
+Esta análise centra-se nos processos judiciais referentes ao pagamento da GAT que excede o teto constitucional. 
+
+
+### Objetivos
+
+O objetivo principal desta análise é investigar os padrões e tendências nos casos de GAT que excedem o teto constitucional. Isto inclui:
+
+- Avaliar a natureza e a extensão dos casos que envolvem o excesso do teto constitucional.
+- Identificar jurisprudências, decisões e práticas comuns nesses casos.
+- Fornecer insights que possam informar políticas e práticas futuras para garantir a conformidade com a lei e a justiça nas decisões de remuneração.
+
+### Estrutura do Relatório
+
+O relatório é organizado nas seguintes seções:
+
+1. **Metodologia:** Detalhamento das técnicas e métodos utilizados na análise.
+2. **Análise dos Dados:** Apresentação e interpretação dos principais achados, com foco em casos que envolvem o pagamento da GAT acima do teto constitucional.
+3. **Conclusões:** Sumário das descobertas e recomendações para garantir a conformidade legal e a equidade na concessão da GAT.
+
+A análise a seguir fornecerá uma visão abrangente dos processos relacionados à GAT, contribuindo para uma compreensão mais profunda desta questão crítica na administração pública.
+
+---
+
+## Aquisição de Dados
+
+A coleta dos dados referentes às ações judiciais que foram julgadas em relação ao pagamento da Gratificação por Acúmulo de Trabalho (GAT) que excede o teto constitucional foi realizada através de uma série de requisições ao site do Tribunal de Justiça de São Paulo (TJSP).
+
+### Fonte dos Dados
+
+Os dados foram extraídos do site [TJSP](https://esaj.tjsp.jus.br/cjsg/resultadoCompleta.do), utilizando um script em Python para automatizar o processo de scraping.
+
+### Método de Extração
+
+O código utilizado para a extração dos dados compreende os seguintes passos:
+
+1. **Preparação da Requisição**: Configuraram-se os cabeçalhos HTTP e os parâmetros da busca, incluindo a pesquisa por "gat+E+teto" e os filtros relevantes.
+
+2. **Requisição**: Utilizou-se a biblioteca `requests` para enviar uma requisição POST à URL especificada, com os dados e cabeçalhos definidos anteriormente.
+
+3. **Extração de Conteúdo**: Com a resposta obtida, usou-se a biblioteca `BeautifulSoup` para analisar o HTML e extrair as informações relevantes. O processo incluiu a identificação e iteração das linhas e colunas que continham os dados de interesse.
+
+4. **Paginação**: A extração foi realizada em várias páginas, iterando através de um total de 61 páginas, conforme identificado no código.
+
+5. **Conversão para DataFrame**: Os dados extraídos foram convertidos em um DataFrame do pandas, permitindo manipulações e análises subsequentes.
+
+6. **Exportação para CSV**: Finalmente, o DataFrame foi exportado para um arquivo CSV para armazenamento e uso futuro.
+
+O script completo, incluindo a definição de funções auxiliares, está disponível no arquivo [tjsp.ipynb](https://colab.research.google.com/drive/1fqRZ68AyMltTs62AggtqMPcMa3XBTgt7).
+
+---
+
+### Considerações
+
+É importante observar que o script depende de uma sessão ativa no site do TJSP, e cuidados devem ser tomados para garantir a conformidade com os termos de uso e as práticas éticas na coleta de dados.
+
+Ao final do processo de extração, obteve-se um conjunto de dados contendo informações como Acórdão, Ementa, Relator(a), Comarca, Órgão Julgador, Data do Julgamento, e outros detalhes pertinentes às ações judiciais relacionadas à GAT.
+
+O script completo utilizado para a aquisição de dados está disponível no arquivo `data_aquisition.py`.
+
+---
+
+```{r load-data}
+library(tidyverse)
+
+dados <- read_csv("gat.csv")
+
+```
